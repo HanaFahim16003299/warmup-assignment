@@ -1,5 +1,5 @@
 const fs = require("fs");
-// Converts "6:01:20 am" to total seconds
+
 function time12ToSeconds(timeStr) {
     let [time, period] = timeStr.split(" ");
     let [hours, minutes, seconds] = time.split(":").map(Number);
@@ -14,7 +14,7 @@ function time12ToSeconds(timeStr) {
     return hours * 3600 + minutes * 60 + seconds;
 }
 
-// Converts seconds to "h:mm:ss"
+
 function secondsToHMS(totalSeconds) {
     let hours = Math.floor(totalSeconds / 3600);
     let remaining = totalSeconds % 3600;
@@ -23,7 +23,7 @@ function secondsToHMS(totalSeconds) {
 
     return `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
-// Converts "h:mm:ss" to total seconds
+
 function hmsToSeconds(timeStr) {
     let [hours, minutes, seconds] = timeStr.split(":").map(Number);
     return hours * 3600 + minutes * 60 + seconds;
@@ -110,7 +110,7 @@ function metQuota(date, activeTime) {
 
     let quotaSeconds;
 
-    // Eid period: April 10 → April 30, 2025
+    
     if (year === 2025 && month === 4 && day >= 10 && day <= 30) {
         quotaSeconds = 6 * 3600;
     } 
@@ -344,7 +344,7 @@ function getRequiredHoursPerMonth(textFile, rateFile, bonusCount, driverID, mont
             continue;
         }
 
-        // safer way to determine weekday
+       
         let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         let recordDay = days[new Date(year, m - 1, day).getDay()];
 
@@ -352,7 +352,7 @@ function getRequiredHoursPerMonth(textFile, rateFile, bonusCount, driverID, mont
             continue;
         }
 
-        // Eid quota vs normal quota
+        
         if (year === 2025 && m === 4 && day >= 10 && day <= 30) {
             totalSeconds += 6 * 3600;
         } else {
@@ -360,7 +360,7 @@ function getRequiredHoursPerMonth(textFile, rateFile, bonusCount, driverID, mont
         }
     }
 
-    // reduce required hours based on bonus count
+    
     totalSeconds -= bonusCount * 2 * 3600;
 
     if (totalSeconds < 0) {
